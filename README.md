@@ -3,42 +3,40 @@
 An end-to-end, production-grade Lakehouse architecture built with **Apache Spark (PySpark)** and **Delta Lake**. This platform demonstrates real-time CDC ingestion, automated data quality validation gates, quarantine management, schema evolution, and performance optimizations (Z-Ordering & Data Salting).
 
 ---
-
 ##  System Architecture
 
-┌─────────────────────────────┐
-             │    Source Systems / CDC     │
-             └──────────────┬──────────────┘
-                            │
-                            ▼
-             ┌─────────────────────────────┐
-             │     Bronze Delta Layer      │  (Raw Json + Metadata)
-             └──────────────┬──────────────┘
-                            │
-                            ▼
-             ┌─────────────────────────────┐
-             │     Data Quality Gate       │
-             └──────┬───────────────┬──────┘
-                    │               │
-             Valid  │               │ Invalid
-                    ▼               ▼
-    ┌───────────────────────┐ ┌─────────────────────────┐
-    │  Silver Delta Layer   │ │ Quarantine Delta Table  │
-    │ (Cleaned & Upserted)  │ └─────────────────────────┘
-    └───────────┬───────────┘
-                │
-                ▼
-    ┌───────────────────────┐
-    │   Gold Delta Layer    │  (Aggregated Business KPIs)
-    └───────────┬───────────┘
-                │
-                ▼
-    ┌───────────────────────┐
-    │ Analytics & Dashboard │
-    └───────────────────────┘
-
-
----
+```
+                 ┌─────────────────────────────┐
+                 │    Source Systems / CDC     │
+                 └──────────────┬──────────────┘
+                                │
+                                ▼
+                 ┌─────────────────────────────┐
+                 │     Bronze Delta Layer      │  (Raw Json + Metadata)
+                 └──────────────┬──────────────┘
+                                │
+                                ▼
+                 ┌─────────────────────────────┐
+                 │     Data Quality Gate       │
+                 └──────┬───────────────┬──────┘
+                        │               │
+                 Valid  │               │ Invalid
+                        ▼               ▼
+        ┌───────────────────────┐ ┌─────────────────────────┐
+        │  Silver Delta Layer   │ │ Quarantine Delta Table  │
+        │ (Cleaned & Upserted)  │ └─────────────────────────┘
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │   Gold Delta Layer    │  (Aggregated Business KPIs)
+        └───────────┬───────────┘
+                    │
+                    ▼
+        ┌───────────────────────┐
+        │ Analytics & Dashboard │
+        └───────────────────────┘
+```
 
 ##  Tech Stack & Key Concepts
 
