@@ -1,0 +1,21 @@
+# Python / Virtual Environment
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Testing & Logs
+.pytest_cache/
+*.log
+
+# Spark & Delta Lake Local Storage / Spark Data
+storage/
+metastore_db/
+derby.log
+.spark-staging/
+
+# IDE / OS Specific
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
