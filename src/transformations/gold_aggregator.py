@@ -8,7 +8,7 @@ class GoldAggregator:
     def __init__(self, spark: SparkSession):
         self.spark = spark
 
-    def build_daily_metrics(self, silver_path: str, gold_path: str):
+    def build_daily_metrics(self, silver_path: str, gold_path: str):   
         """
         Aggregates Silver tier orders data into daily business KPIs.
         """

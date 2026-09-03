@@ -4,7 +4,7 @@ from src.utils.logger import StructuredLogger
 
 logger = StructuredLogger("BronzeIngestor")
 
-class BronzeIngestor:
+class BronzeIngestor:  
     def __init__(self, spark: SparkSession):
         self.spark = spark
 

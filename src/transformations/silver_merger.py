@@ -3,7 +3,7 @@ from pyspark.sql import SparkSession
 from pyspark.sql import functions as F
 from pyspark.sql.window import Window
 from src.quality.rules import DataQualityChecker
-from src.utils.logger import StructuredLogger
+from src.utils.logger import StructuredLogger   
 
 logger = StructuredLogger("SilverMerger")
 

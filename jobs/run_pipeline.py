@@ -17,7 +17,7 @@ def main():
     spark = get_spark_session("ProductionPipeline")
 
     try:
-        # Step 1: Bronze Ingestion
+        # Step 1: Bronze Ingestion 
         ingestor = BronzeIngestor(spark)
         ingestor.ingest_raw_json(raw_data_path, bronze_path)
 

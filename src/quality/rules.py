@@ -13,7 +13,7 @@ class DataQualityChecker:
         """
         Validates order payloads for:
         1. Non-null order_id and customer_id
-        2. Positive total_amount
+        2. Positive total_amount  
         3. Valid status
         """
         validation_expr = (
