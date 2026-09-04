@@ -5,37 +5,46 @@ An end-to-end, production-grade Lakehouse architecture built with **Apache Spark
 ---
 ##  System Architecture
 
+```## 🏛️ System Architecture
+
 ```
-                 ┌─────────────────────────────┐
-                 │    Source Systems / CDC     │
-                 └──────────────┬──────────────┘
-                                │
-                                ▼
-                 ┌─────────────────────────────┐
-                 │     Bronze Delta Layer      │  (Raw Json + Metadata)
-                 └──────────────┬──────────────┘
-                                │
-                                ▼
-                 ┌─────────────────────────────┐
-                 │     Data Quality Gate       │
-                 └──────┬───────────────┬──────┘
-                        │               │
-                 Valid  │               │ Invalid
-                        ▼               ▼
-        ┌───────────────────────┐ ┌─────────────────────────┐
-        │  Silver Delta Layer   │ │ Quarantine Delta Table  │
-        │ (Cleaned & Upserted)  │ └─────────────────────────┘
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │   Gold Delta Layer    │  (Aggregated Business KPIs)
-        └───────────┬───────────┘
-                    │
-                    ▼
-        ┌───────────────────────┐
-        │ Analytics & Dashboard │
-        └───────────────────────┘
+       ┌───────────────────────────────────────────────┐
+       │   Postman / REST Clients (JSON Payloads)     │
+       └───────────────────────┬───────────────────────┘
+                               │
+                               │ POST /api/v1/orders/generate
+                               ▼
+       ┌───────────────────────────────────────────────┐
+       │        FastAPI Producer & Validation          │
+       └───────────────────────┬───────────────────────┘
+                               │
+                               ▼
+       ┌───────────────────────────────────────────────┐
+       │             Bronze Delta Layer                │  (Raw JSON + Metadata)
+       └───────────────────────┬───────────────────────┘
+                               │
+                               ▼
+       ┌───────────────────────────────────────────────┐
+       │               Data Quality Gate               │
+       └───────────────┬───────────────┬───────────────┘
+                       │               │
+                Valid  │               │ Invalid
+                       ▼               ▼
+       ┌───────────────────────┐ ┌─────────────────────────┐
+       │  Silver Delta Layer   │ │ Quarantine Delta Table  │
+       │ (Cleaned & Upserted)  │ └─────────────────────────┘
+       └───────────┬───────────┘
+                   │
+                   ▼
+       ┌───────────────────────┐
+       │   Gold Delta Layer    │  (Aggregated Business KPIs)
+       └───────────┬───────────┘
+                   │
+                   ▼
+       ┌───────────────────────┐
+       │ Analytics & Dashboard │
+       └───────────────────────┘
+```
 ```
 
 ##  Tech Stack & Key Concepts
